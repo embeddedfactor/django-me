@@ -3,7 +3,7 @@ from mongoengine import *
 from django.conf import settings
 from django.contrib import auth
 from django.contrib.auth.hashers import make_password, check_password
-from django.contrib.auth.models import _user_has_perm, _user_get_all_permissions, _user_has_module_perms
+from django.contrib.auth.models import _user_has_perm, _user_get_all_permissions, _user_has_module_perms, AbstractBaseUser
 from django.contrib.contenttypes.models import ContentTypeManager
 from django.core.exceptions import ImproperlyConfigured
 from django.db import models
@@ -438,7 +438,7 @@ class MongoUserManager(UserManager):
         return self.model.objects
 
 
-class MongoUser(models.Model):
+class MongoUser(AbstractBaseUser):
     """"Dummy user model for Django.
 
     MongoUser is used to replace Django's UserManager with MongoUserManager.
