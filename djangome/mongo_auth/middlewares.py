@@ -42,8 +42,8 @@ def login(request, user):
     rotate_token(request)
     user_logged_in.send(sender=user.__class__, request=request, user=user)
 
-
-class CustomAuthenticationMiddleware(object):
+from django.utils.deprecation import MiddlewareMixin
+class CustomAuthenticationMiddleware(MiddlewareMixin):
     def process_request(self, request):
         assert hasattr(request, 'session'), (
             "The Django authentication middleware requires session middleware "
